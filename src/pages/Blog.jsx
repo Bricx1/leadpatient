@@ -1,5 +1,16 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
+import { Heart} from 'lucide-react';
+import React from 'react';
+import {
+  FaInstagram,
+  FaDribbble,
+  FaTwitter,
+  FaYoutube,
+  FaPaperPlane,
+} from 'react-icons/fa';
+
+// ...rest of the component code
 
 const blogPosts = [
   {
@@ -55,17 +66,36 @@ const blogPosts = [
 const Blog = () => {
   return (
     <main className="min-h-screen bg-white text-gray-800">
-      {/* Header */}
+       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="text-xl font-bold text-teal-600">Serenity</div>
-          <nav className="hidden md:flex gap-6 text-sm">
-            <Link to="/" className="hover:text-teal-600">Home</Link>
-            <Link to="/about" className="hover:text-teal-600">About</Link>
-            <Link to="/services" className="hover:text-teal-600">Services</Link>
-            <Link to="/blog" className="text-teal-600 font-semibold">Our Blog</Link>
-            <Link to="/contact" className="hover:text-teal-600">Contact</Link>
-          </nav>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="bg-teal-500 rounded-full p-2 mr-3">
+                <Heart className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <span className="text-2xl font-bold text-gray-900">Serenity</span>
+                <div className="text-sm text-teal-600 font-medium">Rehabilitation Center, Inc.</div>
+              </div>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">Home</Link>
+              <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">Services</Link>
+              <Link to="/about" className="text-gray-700 hover:text-teal-600 transition-colors">About</Link>
+              <Link to="/contact" className="text-gray-700 hover:text-teal-600 transition-colors">Contact Us</Link>
+               <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our Blogs</Link>
+            </nav>
+            <div className="flex items-center space-x-4">
+              <div className="text-right text-sm">
+                <div className="font-semibold text-teal-600">24/7 Crisis Support</div>
+                <div className="text-gray-600">248-838-3686</div>
+              </div>
+              <button className="bg-teal-500 text-white px-6 py-2 rounded-full hover:bg-teal-600 transition-colors">
+                Get Help Now
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -107,47 +137,64 @@ const Blog = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#0d1b40] text-white pt-12 pb-6">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <img src="/serenity-logo.png" alt="Serenity" className="h-12 mb-3" />
-            <p className="text-sm">
-              Our goal is to deliver quality of care in a courteous, respectful, and compassionate manner. 
-              We hope you will allow us to care for you and strive to be your first choice.
-            </p>
-            <a href="/#book" className="text-teal-300 text-sm mt-2 inline-block">➜ Make Appointment</a>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Quick Links</h4>
-            <ul className="space-y-1 text-sm text-gray-300">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/apply">Apply for Job</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Departments</h4>
-            <ul className="space-y-1 text-sm text-gray-300">
-              <li>Counseling</li>
-              <li>MAT Services</li>
-              <li>Peer Recovery</li>
-              <li>Case Management</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Contact</h4>
-            <div className="text-sm space-y-1 text-gray-300">
-              <div>📞 248-838-3686</div>
-              <div>📍 673 MLK Blvd N, Pontiac, MI</div>
-              <div>Mon–Sat: 6am – 2pm</div>
-            </div>
+      <footer className="bg-[#4ecde6] text-white py-12 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+        {/* Branding + Social */}
+        <div>
+          <h2 className="text-3xl font-semibold mb-2">Serenity</h2>
+          <p className="text-sm mb-4">Copyright © 2025 Serenity. All rights reserved.</p>
+          <div className="flex gap-4 text-xl">
+            <a href="#" aria-label="Instagram"><FaInstagram /></a>
+            <a href="#" aria-label="Dribbble"><FaDribbble /></a>
+            <a href="#" aria-label="Twitter"><FaTwitter /></a>
+            <a href="#" aria-label="YouTube"><FaYoutube /></a>
           </div>
         </div>
-        <p className="text-center text-xs mt-8 text-gray-400">
-          &copy; 2025 Serenity Rehabilitation | Powered by Serenity Foundation
-        </p>
-      </footer>
+
+        {/* Company Links */}
+        <div>
+          <h4 className="font-semibold mb-3">Company</h4>
+          <ul className="space-y-2 text-sm">
+            <li><a href="/about" className="hover:underline">About us</a></li>
+            <li><a href="/blogs" className="hover:underline">Blog</a></li>
+            <li><a href="/services" className="hover:underline">Services</a></li>
+            <li><a href="/testimonials" className="hover:underline">Testimonials</a></li>
+          </ul>
+        </div>
+
+        {/* Support Links */}
+        <div>
+          <h4 className="font-semibold mb-3">Support</h4>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:underline">Help center</a></li>
+            <li><a href="#" className="hover:underline">Terms of service</a></li>
+            <li><a href="#" className="hover:underline">Legal</a></li>
+            <li><a href="#" className="hover:underline">Privacy policy</a></li>
+            <li><a href="#" className="hover:underline">Status</a></li>
+          </ul>
+        </div>
+
+        {/* Newsletter */}
+        <div>
+          <h4 className="font-semibold mb-3">Stay up to date</h4>
+          <form className="flex items-center bg-white rounded-md overflow-hidden">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 px-3 py-2 text-gray-800 outline-none text-sm"
+            />
+            <button
+              type="submit"
+              className="bg-[#1e3369] hover:bg-[#1a2c59] p-2 text-white"
+            >
+              <FaPaperPlane size={16} />
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </footer>
     </main>
   );
 };

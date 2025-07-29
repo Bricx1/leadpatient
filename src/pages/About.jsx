@@ -26,9 +26,11 @@ const About = () => {
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
+              <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">Home</Link>
               <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">Services</Link>
               <Link to="/about" className="text-gray-700 hover:text-teal-600 transition-colors">About</Link>
               <Link to="/contact" className="text-gray-700 hover:text-teal-600 transition-colors">Contact Us</Link>
+              <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our blog</Link>
             </nav>
             <div className="flex items-center space-x-4">
               <div className="text-right text-sm">
@@ -118,6 +120,57 @@ const About = () => {
           </Link>
         </div>
       </section>
+      {/* Footer */}
+            <footer className="bg-gray-900 text-white py-16">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <div className="flex items-center mb-4">
+                      <div className="bg-teal-500 rounded-full p-2 mr-3">
+                        <Heart className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-2xl font-bold">Serenity</span>
+                        <div className="text-sm text-teal-400">Rehabilitation Center, Inc.</div>
+                      </div>
+                    </div>
+                    <p className="text-gray-400 mb-4">
+                      Providing comprehensive addiction treatment and counseling services 
+                      with dignity, respect, and evidence-based care.
+                    </p>
+                  </div>
+      
+                  <div>
+                    <h4 className="text-lg font-semibold mb-4">Services</h4>
+                    <ul className="space-y-2 text-gray-400">
+                      <li>Methadone Maintenance</li>
+                      <li>Individual Counseling</li>
+                      <li>Group Therapy</li>
+                      <li>Crisis Intervention</li>
+                      <li>Family Support</li>
+                    </ul>
+                  </div>
+      
+                  <div>
+                    <h4 className="text-lg font-semibold mb-4">Emergency Contact</h4>
+                    <div className="space-y-2 text-gray-400">
+                      <div className="text-red-400 font-semibold">24/7 Crisis Support</div>
+                      <div className="text-xl font-bold text-white">248-838-3686</div>
+                      <div className="text-sm">
+                        If you're experiencing a medical emergency, call 911
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                  <p>&copy; 2025 Serenity Rehabilitation Center, Inc. All rights reserved.</p>
+                  <p className="text-sm mt-2">
+                    Licensed addiction treatment facility. All patient information is confidential and protected under HIPAA.
+                  </p>
+                </div>
+              </div>
+            </footer>
     </div>
   );
 };

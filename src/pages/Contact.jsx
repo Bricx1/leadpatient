@@ -1,9 +1,43 @@
 import React from 'react';
-import { Phone, Mail, MapPin, FileText } from 'lucide-react';
+import { Phone, Mail, MapPin, FileText, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   return (
     <div className="bg-white">
+      {/* Header */}
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="bg-teal-500 rounded-full p-2 mr-3">
+                <Heart className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <span className="text-2xl font-bold text-gray-900">Serenity</span>
+                <div className="text-sm text-teal-600 font-medium">Rehabilitation Center, Inc.</div>
+              </div>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">Home</Link>
+              <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">Services</Link>
+              <Link to="/about" className="text-gray-700 hover:text-teal-600 transition-colors">About</Link>
+              <Link to="/contact" className="text-gray-700 hover:text-teal-600 transition-colors">Contact Us</Link>
+               <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our Blogs</Link>
+            </nav>
+            <div className="flex items-center space-x-4">
+              <div className="text-right text-sm">
+                <div className="font-semibold text-teal-600">24/7 Crisis Support</div>
+                <div className="text-gray-600">248-838-3686</div>
+              </div>
+              <button className="bg-teal-500 text-white px-6 py-2 rounded-full hover:bg-teal-600 transition-colors">
+                Get Help Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Map & Form Section */}
       <div className="relative w-full">
         <iframe
@@ -22,17 +56,24 @@ const Contact = () => {
               <p className="text-sm text-gray-500">
                 Don’t have time for a phone call? Submit your request and we’ll reach out to you.
               </p>
-              <form className="space-y-4">
+              <form className="space-y-4 text-sm font-medium">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Name" className="input" />
-                  <input type="email" placeholder="Email" className="input" />
-                  <input type="text" placeholder="Counseling And Detox..." className="input col-span-2" />
-                  <input type="text" placeholder="Phone" className="input col-span-2" />
+                  <input type="text" placeholder="Name" className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                  <input type="email" placeholder="Email" className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                  <select className="w-full rounded-full border border-gray-300 px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400" defaultValue="">
+                    <option value="" disabled>Select Service</option>
+                    <option>Counseling And Drug Screening</option>
+                    <option>Medication-Assisted Treatment</option>
+                    <option>Individual and Group Therapy</option>
+                    <option>Peer Support</option>
+                    <option>Family Reunification</option>
+                    <option>Case Management</option>
+                    <option>After Care Services</option>
+                  </select>
+                  <input type="text" placeholder="Phone" className="w-full rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
                 </div>
-                <textarea placeholder="Write your message here..." className="input h-24 w-full resize-none" />
-                <button type="submit" className="w-full bg-blue-900 text-white rounded-full py-2 hover:bg-blue-800">
-                  Submit Request
-                </button>
+                <textarea placeholder="Write your message here..." className="w-full rounded-xl border border-gray-300 px-4 py-2 resize-none h-24 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                <button type="submit" className="w-full bg-blue-900 text-white rounded-full py-2 hover:bg-blue-800 transition">Submit Request</button>
               </form>
             </div>
 
@@ -41,14 +82,8 @@ const Contact = () => {
               <h3 className="text-lg font-semibold mb-4">Quick Contacts</h3>
               <p className="text-sm mb-2">Please feel free to contact our friendly staff with any inquiry.</p>
               <div className="mt-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  <span className="font-bold">248-838-3686</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4" />
-                  673 Martin Luther King Jr Blvd N, Pontiac, MI 48342
-                </div>
+                <div className="flex items-center gap-2"><Phone className="h-4 w-4" /><span className="font-bold">248-838-3686</span></div>
+                <div className="flex items-center gap-2 text-sm"><MapPin className="h-4 w-4" /> 673 Martin Luther King Jr Blvd N, Pontiac, MI 48342</div>
                 <div className="text-xs mt-2">Mon – Sat: 6:00 am – 2:00 pm</div>
               </div>
               <a href="/about" className="mt-4 inline-block text-sm underline text-white/90">About Us</a>
@@ -59,90 +94,65 @@ const Contact = () => {
 
       {/* Brochures */}
       <div className="text-center mt-56 mb-8">
-        <a
-          href="/Counseling-Brochure.pdf"
-          className="bg-blue-900 text-white py-2 px-4 rounded-full text-sm hover:bg-blue-800 mx-2 inline-flex items-center gap-1"
-          download
-        >
-          <FileText className="w-4 h-4" />
-          Counseling Brochure
+        <a href="/Counseling-Brochure.pdf" className="bg-blue-900 text-white py-2 px-4 rounded-full text-sm hover:bg-blue-800 mx-2 inline-flex items-center gap-1" download>
+          <FileText className="w-4 h-4" /> Counseling Brochure
         </a>
-        <a
-          href="/Methadone-Brochure.pdf"
-          className="bg-teal-600 text-white py-2 px-4 rounded-full text-sm hover:bg-teal-500 mx-2 inline-flex items-center gap-1"
-          download
-        >
-          <FileText className="w-4 h-4" />
-          Methadone Brochure
+        <a href="/Methadone-Brochure.pdf" className="bg-teal-600 text-white py-2 px-4 rounded-full text-sm hover:bg-teal-500 mx-2 inline-flex items-center gap-1" download>
+          <FileText className="w-4 h-4" /> Methadone Brochure
         </a>
       </div>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white px-4 py-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Left */}
-          <div>
-            <img src="/serenity-logo.png" alt="Serenity Logo" className="h-12 mb-3" />
-            <p className="text-sm leading-relaxed">
-              Our goal is to deliver quality of care in a courteous, respectful, and compassionate manner.
-              We hope you will allow us to care for you and strive to be the best choice.
-            </p>
-            <a href="#book" className="text-teal-300 text-sm mt-2 inline-block">➜ Make Appointment</a>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h4 className="font-semibold mb-3">Quick Links</h4>
-            <ul className="space-y-1 text-sm">
-              <li><a href="/" className="hover:underline">Home</a></li>
-              <li><a href="/about" className="hover:underline">About Us</a></li>
-              <li><a href="/services" className="hover:underline">Our Services</a></li>
-              <li><a href="/blogs" className="hover:underline">Our Blogs</a></li>
-              <li><a href="/apply" className="hover:underline">Apply for Job</a></li>
-            </ul>
-          </div>
-
-          {/* Departments */}
-          <div>
-            <h4 className="font-semibold mb-3">Departments</h4>
-            <ul className="space-y-1 text-sm">
-              <li>Counseling and Drug Screening</li>
-              <li>Medication-Assisted Treatment</li>
-              <li>Individual/Group Therapy</li>
-              <li>Family Reunification</li>
-              <li>Peer Support</li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold mb-3">Quick Contacts</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <span>248-838-3686</span>
+            <footer className="bg-gray-900 text-white py-16">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <div className="flex items-center mb-4">
+                      <div className="bg-teal-500 rounded-full p-2 mr-3">
+                        <Heart className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-2xl font-bold">Serenity</span>
+                        <div className="text-sm text-teal-400">Rehabilitation Center, Inc.</div>
+                      </div>
+                    </div>
+                    <p className="text-gray-400 mb-4">
+                      Providing comprehensive addiction treatment and counseling services 
+                      with dignity, respect, and evidence-based care.
+                    </p>
+                  </div>
+      
+                  <div>
+                    <h4 className="text-lg font-semibold mb-4">Services</h4>
+                    <ul className="space-y-2 text-gray-400">
+                      <li>Methadone Maintenance</li>
+                      <li>Individual Counseling</li>
+                      <li>Group Therapy</li>
+                      <li>Crisis Intervention</li>
+                      <li>Family Support</li>
+                    </ul>
+                  </div>
+      
+                  <div>
+                    <h4 className="text-lg font-semibold mb-4">Emergency Contact</h4>
+                    <div className="space-y-2 text-gray-400">
+                      <div className="text-red-400 font-semibold">24/7 Crisis Support</div>
+                      <div className="text-xl font-bold text-white">248-838-3686</div>
+                      <div className="text-sm">
+                        If you're experiencing a medical emergency, call 911
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                  <p>&copy; 2025 Serenity Rehabilitation Center, Inc. All rights reserved.</p>
+                  <p className="text-sm mt-2">
+                    Licensed addiction treatment facility. All patient information is confidential and protected under HIPAA.
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <span>240-027-9626</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                <span>673 MLK Jr Blvd, Pontiac, MI</span>
-              </div>
-              <div className="flex gap-3 mt-2">
-                <a href="#" className="hover:underline">FB</a>
-                <a href="#" className="hover:underline">IG</a>
-                <a href="#" className="hover:underline">Map</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center text-xs text-white/70 mt-8 border-t border-white/20 pt-4">
-          &copy; 2025 Serenity Rehabilitation Inc. | Designed by Serenity Foundation
-        </div>
-      </footer>
+            </footer>
     </div>
   );
 };

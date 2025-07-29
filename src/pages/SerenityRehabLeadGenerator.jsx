@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, CheckCircle, Heart, Shield, Users, Clock, Star, ArrowRight, FileText, Calendar, AlertCircle, Smile } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import MoodMatchGame from '../components/MoodMatchGame';
 const SerenityRehabLeadGenerator = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -98,6 +98,9 @@ const SerenityRehabLeadGenerator = () => {
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
+              <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">
+    Home
+  </Link>
                <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">
     Services
   </Link>
@@ -679,6 +682,7 @@ const SerenityRehabLeadGenerator = () => {
           </div>
         </div>
       </footer>
+     
     </div>
   );
 };
