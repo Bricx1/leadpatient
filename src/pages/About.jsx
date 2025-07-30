@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
 import {
@@ -8,7 +8,7 @@ import {
   FaYoutube,
   FaPaperPlane,
 } from 'react-icons/fa';
-import { TopInfoBar} from './components/TopInfoBar';
+
 const values = [
   { title: 'Compassion', desc: 'We treat every individual with empathy, understanding, and kindness.' },
   { title: 'Integrity', desc: 'We uphold the highest standards of honesty, accountability, and ethics.' },

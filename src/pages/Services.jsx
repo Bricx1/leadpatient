@@ -1,7 +1,22 @@
-import React, { useState, useEffect } from 'react'; // ✅ Correct
+import React, { useEffect } from 'react'; // Only use React if you're using JSX
 
-import { Heart, Star, ChevronLeft, ChevronRight, Users, Clock, Award, TrendingUp, CheckCircle } from 'lucide-react';
+// Lucide icons
+import {
+  Heart,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  Clock,
+  Award,
+  TrendingUp,
+  CheckCircle,
+} from 'lucide-react';
+
+// React Router
 import { Link } from 'react-router-dom';
+
+// Font Awesome icons
 import {
   FaInstagram,
   FaDribbble,
@@ -9,6 +24,7 @@ import {
   FaYoutube,
   FaPaperPlane,
 } from 'react-icons/fa';
+
 const patientJourneys = [
   {
     id: 1,

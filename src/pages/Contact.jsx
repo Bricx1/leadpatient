@@ -1,14 +1,19 @@
-import { useState, useEffect, useContext, useRef } from 'react'; // ✅ correct
-
-import { Phone, Mail, MapPin, FileText, Heart } from 'lucide-react';
+// React Router
 import { Link } from 'react-router-dom';
+
+// Lucide icon(s)
+import { Heart } from 'lucide-react';
+
+// Font Awesome icons
 import {
+  FaArrowRight,
   FaInstagram,
   FaDribbble,
   FaTwitter,
   FaYoutube,
   FaPaperPlane,
 } from 'react-icons/fa';
+
 const Contact = () => {
   return (
     <div className="bg-white">

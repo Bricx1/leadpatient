@@ -1,15 +1,19 @@
-import { FaArrowRight } from 'react-icons/fa'; // ✅
-
+// React Router
 import { Link } from 'react-router-dom';
-import { Heart} from 'lucide-react';
-import React from 'react';
+
+// Lucide icon(s)
+import { Heart } from 'lucide-react';
+
+// Font Awesome icons
 import {
+  FaArrowRight,
   FaInstagram,
   FaDribbble,
   FaTwitter,
   FaYoutube,
   FaPaperPlane,
 } from 'react-icons/fa';
+
 
 // ...rest of the component code
 

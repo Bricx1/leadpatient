@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, CheckCircle, Heart, Shield, Users, Clock, Star, ArrowRight, FileText, Calendar, AlertCircle, Smile } from 'lucide-react';
+
+// Lucide icons
+import {
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle,
+  Heart,
+  Shield,
+  Users,
+  Clock,
+  Star,
+  ArrowRight,
+  FileText,
+  Calendar,
+  AlertCircle,
+  Smile,
+} from 'lucide-react';
+
+// React Router
 import { Link } from 'react-router-dom';
+
+// Font Awesome icons
 import {
   FaInstagram,
   FaDribbble,
@@ -8,6 +29,7 @@ import {
   FaYoutube,
   FaPaperPlane,
 } from 'react-icons/fa';
+
 const SerenityRehabLeadGenerator = () => {
   const [formData, setFormData] = useState({
     name: '',
