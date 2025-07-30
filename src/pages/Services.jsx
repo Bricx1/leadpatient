@@ -108,36 +108,38 @@ const Services = () => {
   }, []);
 
   // Progress bar animation
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgressAnimation(prev => (prev + 1) % 101);
-    }, 100);
-    return () => clearInterval(timer);
-  }, []);
+ // Progress animation
+useEffect(() => {
+  const timer = setInterval(() => {
+    setProgressAnimation(prev => (prev + 1) % 101);
+  }, 100);
+  return () => clearInterval(timer);
+}, []);
 
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+// Auto-rotate testimonials
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+  }, 5000);
+  return () => clearInterval(interval);
+}, [testimonials.length]);
 
-  // Auto-rotate gallery images
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentGalleryImage(prev => (prev + 1) % galleryImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+// Auto-rotate gallery images
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentGalleryImage(prev => (prev + 1) % galleryImages.length);
+  }, 4000);
+  return () => clearInterval(interval);
+}, [galleryImages.length]);
 
-  // Auto-rotate patient stories
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPatient(prev => (prev + 1) % patientJourneys.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+// Auto-rotate patient stories
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentPatient(prev => (prev + 1) % patientJourneys.length);
+  }, 6000);
+  return () => clearInterval(interval);
+}, [patientJourneys.length]);
+
 
   const services = [
     {
@@ -591,10 +593,19 @@ const Services = () => {
                             <h2 className="text-3xl font-semibold mb-2">Serenity</h2>
                             <p className="text-sm mb-4">Copyright © 2025 Serenity. All rights reserved.</p>
                             <div className="flex gap-4 text-xl">
-                              <a href="#" aria-label="Instagram"><FaInstagram /></a>
-                              <a href="#" aria-label="Dribbble"><FaDribbble /></a>
-                              <a href="#" aria-label="Twitter"><FaTwitter /></a>
-                              <a href="#" aria-label="YouTube"><FaYoutube /></a>
+                              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+  <FaInstagram />
+</a>
+<a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+  <FaDribbble />
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+  <FaTwitter />
+</a>
+<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+  <FaYoutube />
+</a>
+
                             </div>
                           </div>
                   
