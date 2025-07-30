@@ -1,5 +1,6 @@
 // React Router
-import { Link } from 'react-router-dom';
+import { Link,  } from 'react-router-dom';
+import { Phone, MapPin, FileText } from "lucide-react"; // or 'react-feather' if that's what you're using
 
 // Lucide icon(s)
 import { Heart } from 'lucide-react';
