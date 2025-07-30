@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
-
+import {
+  FaInstagram,
+  FaDribbble,
+  FaTwitter,
+  FaYoutube,
+  FaPaperPlane,
+} from 'react-icons/fa';
+import { TopInfoBar} from './components/TopInfoBar';
 const values = [
   { title: 'Compassion', desc: 'We treat every individual with empathy, understanding, and kindness.' },
   { title: 'Integrity', desc: 'We uphold the highest standards of honesty, accountability, and ethics.' },
@@ -30,7 +37,7 @@ const About = () => {
               <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">Services</Link>
               <Link to="/about" className="text-gray-700 hover:text-teal-600 transition-colors">About</Link>
               <Link to="/contact" className="text-gray-700 hover:text-teal-600 transition-colors">Contact Us</Link>
-              <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our blog</Link>
+              <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our Blogs </Link>
             </nav>
             <div className="flex items-center space-x-4">
               <div className="text-right text-sm">
@@ -121,56 +128,64 @@ const About = () => {
         </div>
       </section>
       {/* Footer */}
-            <footer className="bg-gray-900 text-white py-16">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div>
-                    <div className="flex items-center mb-4">
-                      <div className="bg-teal-500 rounded-full p-2 mr-3">
-                        <Heart className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <span className="text-2xl font-bold">Serenity</span>
-                        <div className="text-sm text-teal-400">Rehabilitation Center, Inc.</div>
-                      </div>
-                    </div>
-                    <p className="text-gray-400 mb-4">
-                      Providing comprehensive addiction treatment and counseling services 
-                      with dignity, respect, and evidence-based care.
-                    </p>
-                  </div>
+            <footer className="bg-[#4ecde6] text-white py-12 px-6">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
       
-                  <div>
-                    <h4 className="text-lg font-semibold mb-4">Services</h4>
-                    <ul className="space-y-2 text-gray-400">
-                      <li>Methadone Maintenance</li>
-                      <li>Individual Counseling</li>
-                      <li>Group Therapy</li>
-                      <li>Crisis Intervention</li>
-                      <li>Family Support</li>
-                    </ul>
-                  </div>
-      
-                  <div>
-                    <h4 className="text-lg font-semibold mb-4">Emergency Contact</h4>
-                    <div className="space-y-2 text-gray-400">
-                      <div className="text-red-400 font-semibold">24/7 Crisis Support</div>
-                      <div className="text-xl font-bold text-white">248-838-3686</div>
-                      <div className="text-sm">
-                        If you're experiencing a medical emergency, call 911
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-                  <p>&copy; 2025 Serenity Rehabilitation Center, Inc. All rights reserved.</p>
-                  <p className="text-sm mt-2">
-                    Licensed addiction treatment facility. All patient information is confidential and protected under HIPAA.
-                  </p>
+              {/* Branding + Social */}
+              <div>
+                <h2 className="text-3xl font-semibold mb-2">Serenity</h2>
+                <p className="text-sm mb-4">Copyright © 2025 Serenity. All rights reserved.</p>
+                <div className="flex gap-4 text-xl">
+                  <a href="#" aria-label="Instagram"><FaInstagram /></a>
+                  <a href="#" aria-label="Dribbble"><FaDribbble /></a>
+                  <a href="#" aria-label="Twitter"><FaTwitter /></a>
+                  <a href="#" aria-label="YouTube"><FaYoutube /></a>
                 </div>
               </div>
-            </footer>
+      
+              {/* Company Links */}
+              <div>
+                <h4 className="font-semibold mb-3">Company</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="/about" className="hover:underline">About us</a></li>
+                  <li><a href="/blogs" className="hover:underline">Blog</a></li>
+                  <li><a href="/services" className="hover:underline">Services</a></li>
+                  <li><a href="/testimonials" className="hover:underline">Testimonials</a></li>
+                </ul>
+              </div>
+      
+              {/* Support Links */}
+              <div>
+                <h4 className="font-semibold mb-3">Support</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="#" className="hover:underline">Help center</a></li>
+                  <li><a href="#" className="hover:underline">Terms of service</a></li>
+                  <li><a href="#" className="hover:underline">Legal</a></li>
+                  <li><a href="#" className="hover:underline">Privacy policy</a></li>
+                  <li><a href="#" className="hover:underline">Status</a></li>
+                </ul>
+              </div>
+      
+              {/* Newsletter */}
+              <div>
+                <h4 className="font-semibold mb-3">Stay up to date</h4>
+                <form className="flex items-center bg-white rounded-md overflow-hidden">
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    className="flex-1 px-3 py-2 text-gray-800 outline-none text-sm"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-[#1e3369] hover:bg-[#1a2c59] p-2 text-white"
+                  >
+                    <FaPaperPlane size={16} />
+                  </button>
+                </form>
+              </div>
+      
+            </div>
+          </footer>
     </div>
   );
 };

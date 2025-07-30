@@ -1,12 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import { Heart, Star, ChevronLeft, ChevronRight, Users, Clock, Award } from 'lucide-react';
-import { Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react'; // ✅ Correct
+
+import { Heart, Star, ChevronLeft, ChevronRight, Users, Clock, Award, TrendingUp, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import {
+  FaInstagram,
+  FaDribbble,
+  FaTwitter,
+  FaYoutube,
+  FaPaperPlane,
+} from 'react-icons/fa';
+const patientJourneys = [
+  {
+    id: 1,
+    title: 'Initial Assessment',
+    description: 'Patient meets counselor for evaluation.',
+    icon: '/icons/assessment.png',
+    milestones: ['Vitals check', 'Psych Eval', 'Nursing Intake']
+  },
+  {
+    id: 2,
+    title: 'Treatment Planning',
+    description: 'Create a custom plan.',
+    icon: '/icons/plan.png',
+    milestones: ['Set Goals', 'Choose Treatment', 'Discuss Medications']
+  },
+  {
+    id: 3,
+    title: 'Therapy Sessions',
+    description: 'Ongoing therapy work.',
+    icon: '/icons/therapy.png',
+    milestones: ['Weekly 1-on-1', 'Group Therapy', 'Peer Review']
+  },
+  {
+    id: 4,
+    title: 'Ongoing Support',
+    description: 'Continued recovery support.',
+    icon: '/icons/support.png',
+    milestones: ['Peer Check-ins', 'Job Coaching', 'Community Programs']
+  }
+];
+
 const Services = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentGalleryImage, setCurrentGalleryImage] = useState(0);
+  const [currentPatient, setCurrentPatient] = useState(0);
+  const [, setAnimatedStats] = useState({ patients: 0, years: 0, success: 0 });
+  const [, setProgressAnimation] = useState(0);
+ 
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Animate statistics counters
+  useEffect(() => {
+    const animateCounters = () => {
+      const duration = 2000;
+      const steps = 60;
+      const increment = duration / steps;
+      let currentStep = 0;
+
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        
+        setAnimatedStats({
+          patients: Math.floor(2500 * progress),
+          years: Math.floor(15 * progress),
+          success: Math.floor(95 * progress)
+        });
+
+        if (currentStep >= steps) {
+          clearInterval(timer);
+          setAnimatedStats({ patients: 2500, years: 15, success: 95 });
+        }
+      }, increment);
+
+      return () => clearInterval(timer);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+      }
+    });
+
+    const statsElement = document.getElementById('stats-section');
+    if (statsElement) observer.observe(statsElement);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Progress bar animation
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgressAnimation(prev => (prev + 1) % 101);
+    }, 100);
+    return () => clearInterval(timer);
   }, []);
 
   // Auto-rotate testimonials
@@ -22,6 +112,14 @@ const Services = () => {
     const interval = setInterval(() => {
       setCurrentGalleryImage(prev => (prev + 1) % galleryImages.length);
     }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-rotate patient stories
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPatient(prev => (prev + 1) % patientJourneys.length);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -89,7 +187,7 @@ const Services = () => {
 
   const galleryImages = [
     {
-      url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
+      url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
       caption: "Group therapy session"
     },
     {
@@ -128,11 +226,11 @@ const Services = () => {
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">Home</Link>
+             <Link to="/*" className="text-gray-700 hover:text-teal-600 transition-colors">Home</Link>
               <Link to="/services" className="text-gray-700 hover:text-teal-600 transition-colors">Services</Link>
               <Link to="/about" className="text-gray-700 hover:text-teal-600 transition-colors">About</Link>
               <Link to="/contact" className="text-gray-700 hover:text-teal-600 transition-colors">Contact Us</Link>
-               <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our Blogs</Link>
+              <Link to="/blog" className="text-gray-700 hover:text-teal-600 transition-colors">Our Blogs </Link>
             </nav>
             <div className="flex items-center space-x-4">
               <div className="text-right text-sm">
@@ -185,14 +283,26 @@ const Services = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-teal-600 text-white py-12 mt-12">
+      <div id="stats-section" className="bg-teal-600 text-white py-12 mt-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <stat.icon className="h-12 w-12 mb-4 text-teal-200" />
-                <div className="text-4xl font-bold mb-2">{stat.number}</div>
+              <div key={index} className="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
+                <stat.icon className="h-12 w-12 mb-4 text-teal-200 animate-pulse" />
+                <div className="text-4xl font-bold mb-2">
+                  {stat.number.toLocaleString()}{stat.suffix}
+                </div>
                 <div className="text-teal-200">{stat.label}</div>
+                <div className="w-full bg-teal-700 rounded-full h-2 mt-3">
+                  <div 
+                    className="bg-white h-2 rounded-full transition-all duration-2000 ease-out"
+                    style={{ 
+                      width: index === 0 ? `${(stat.number/2500)*100}%` : 
+                             index === 1 ? `${(stat.number/15)*100}%` : 
+                             `${stat.number}%` 
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -242,7 +352,125 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Patient Testimonials */}
+      {/* Patient Journey Automation */}
+      <div className="bg-gradient-to-br from-blue-50 to-teal-50 py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+            Patient Recovery Journey
+          </h2>
+          
+          <div className="bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-500">
+            <div className="flex items-center justify-between mb-8">
+              <button
+                onClick={() => setCurrentPatient(prev => 
+                  prev === 0 ? patientJourneys.length - 1 : prev - 1
+                )}
+                className="p-3 rounded-full bg-teal-100 hover:bg-teal-200 transition-colors"
+              >
+                <ChevronLeft className="h-6 w-6 text-teal-600" />
+              </button>
+              
+              <div className="flex-1 mx-8">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="relative">
+                    <img
+                      src={patientJourneys[currentPatient].image}
+                      alt={patientJourneys[currentPatient].name}
+                      className="w-20 h-20 rounded-full object-cover border-4 border-teal-500 shadow-lg"
+                    />
+                    <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-bounce">
+                      {patientJourneys[currentPatient].daysClean} days
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    {patientJourneys[currentPatient].name}
+                  </h3>
+                  <div className="text-teal-600 font-semibold mb-2">
+                    {patientJourneys[currentPatient].phase}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Age {patientJourneys[currentPatient].age} • Next: {patientJourneys[currentPatient].nextAppointment}
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mb-6">
+                  <div className="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>Recovery Progress</span>
+                    <span>{patientJourneys[currentPatient].successRate}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div 
+                      className="bg-gradient-to-r from-teal-500 to-green-500 h-3 rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
+                      style={{ width: `${patientJourneys[currentPatient].successRate}%` }}
+                    >
+                      <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Milestones */}
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                    <TrendingUp className="h-5 w-5 mr-2 text-teal-600" />
+                    Treatment Milestones
+                  </h4>
+                  {patientJourneys[currentPatient].milestones.map((milestone, index) => (
+                    <div 
+                      key={index} 
+                      className={`flex items-center p-3 rounded-lg transition-all duration-300 ${
+                        milestone.completed 
+                          ? 'bg-green-50 border-l-4 border-green-500' 
+                          : 'bg-gray-50 border-l-4 border-gray-300'
+                      }`}
+                    >
+                      <div className={`flex-shrink-0 ${milestone.completed ? 'animate-bounce' : ''}`}>
+                        {milestone.completed ? (
+                          <CheckCircle className="h-6 w-6 text-green-500" />
+                        ) : (
+                          <Clock className="h-6 w-6 text-gray-400" />
+                        )}
+                      </div>
+                      <div className="ml-3 flex-1">
+                        <div className={`font-medium ${
+                          milestone.completed ? 'text-green-800' : 'text-gray-600'
+                        }`}>
+                          {milestone.task}
+                        </div>
+                        <div className="text-sm text-gray-500">{milestone.date}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <button
+                onClick={() => setCurrentPatient(prev => 
+                  (prev + 1) % patientJourneys.length
+                )}
+                className="p-3 rounded-full bg-teal-100 hover:bg-teal-200 transition-colors"
+              >
+                <ChevronRight className="h-6 w-6 text-teal-600" />
+              </button>
+            </div>
+            
+            <div className="flex justify-center space-x-2">
+              {patientJourneys.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPatient(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    index === currentPatient ? 'bg-teal-600' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Patient Success Stories</h2>
@@ -314,75 +542,90 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
-      <div className="bg-teal-600 text-white py-16">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Recovery Journey?</h2>
-          <p className="text-xl text-teal-100 mb-8">
-            Our compassionate team is here to support you every step of the way.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-teal-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-              Schedule Consultation
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-600 transition-colors">
-              Download Brochure
-            </button>
-          </div>
-        </div>
-      </div>
+     {/* Call to Action */}
+<div className="bg-teal-600 text-white py-16">
+  <div className="max-w-4xl mx-auto text-center px-4">
+    <h2 className="text-3xl font-bold mb-4">Ready to Start Your Recovery Journey?</h2>
+    <p className="text-xl text-teal-100 mb-8">
+      Our compassionate team is here to support you every step of the way.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <button className="bg-white text-teal-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+        Schedule Consultation
+      </button>
+
+      {/* Download Brochure button */}
+      <a
+        href="/Serenity-Brochure-High-Res_compressed.pdf"
+        download
+        className="inline-block border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-teal-600 transition-colors"
+      >
+        Download Brochure
+      </a>
+    </div>
+  </div>
+</div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="bg-teal-500 rounded-full p-2 mr-3">
-                  <Heart className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <span className="text-2xl font-bold">Serenity</span>
-                  <div className="text-sm text-teal-400">Rehabilitation Center, Inc.</div>
-                </div>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Providing comprehensive addiction treatment and counseling services 
-                with dignity, respect, and evidence-based care.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Methadone Maintenance</li>
-                <li>Individual Counseling</li>
-                <li>Group Therapy</li>
-                <li>Crisis Intervention</li>
-                <li>Family Support</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Emergency Contact</h4>
-              <div className="space-y-2 text-gray-400">
-                <div className="text-red-400 font-semibold">24/7 Crisis Support</div>
-                <div className="text-xl font-bold text-white">248-838-3686</div>
-                <div className="text-sm">
-                  If you're experiencing a medical emergency, call 911
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Serenity Rehabilitation Center, Inc. All rights reserved.</p>
-            <p className="text-sm mt-2">
-              Licensed addiction treatment facility. All patient information is confidential and protected under HIPAA.
-            </p>
-          </div>
-        </div>
-      </footer>
+                        <footer className="bg-[#4ecde6] text-white py-12 px-6">
+                        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+                  
+                          {/* Branding + Social */}
+                          <div>
+                            <h2 className="text-3xl font-semibold mb-2">Serenity</h2>
+                            <p className="text-sm mb-4">Copyright © 2025 Serenity. All rights reserved.</p>
+                            <div className="flex gap-4 text-xl">
+                              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+                              <a href="#" aria-label="Dribbble"><FaDribbble /></a>
+                              <a href="#" aria-label="Twitter"><FaTwitter /></a>
+                              <a href="#" aria-label="YouTube"><FaYoutube /></a>
+                            </div>
+                          </div>
+                  
+                          {/* Company Links */}
+                          <div>
+                            <h4 className="font-semibold mb-3">Company</h4>
+                            <ul className="space-y-2 text-sm">
+                              <li><a href="/about" className="hover:underline">About us</a></li>
+                              <li><a href="/blogs" className="hover:underline">Blog</a></li>
+                              <li><a href="/services" className="hover:underline">Services</a></li>
+                              <li><a href="/testimonials" className="hover:underline">Testimonials</a></li>
+                            </ul>
+                          </div>
+                  
+                          {/* Support Links */}
+                          <div>
+                            <h4 className="font-semibold mb-3">Support</h4>
+                            <ul className="space-y-2 text-sm">
+                              
+<li><Link to="/serenity-support" className="hover:underline">Help center</Link></li>
+<li><Link to="/serenity-support?section=terms" className="hover:underline">Terms</Link></li>
+<li><Link to="/serenity-support?section=privacy" className="hover:underline">Privacy</Link></li>
+<li><Link to="/serenity-support?section=legal" className="hover:underline">Legal</Link></li>
+<li><Link to="/serenity-support?section=status" className="hover:underline">Status</Link></li>
+                            </ul>
+                          </div>
+                  
+                          {/* Newsletter */}
+                          <div>
+                            <h4 className="font-semibold mb-3">Stay up to date</h4>
+                            <form className="flex items-center bg-white rounded-md overflow-hidden">
+                              <input
+                                type="email"
+                                placeholder="Your email address"
+                                className="flex-1 px-3 py-2 text-gray-800 outline-none text-sm"
+                              />
+                              <button
+                                type="submit"
+                                className="bg-[#1e3369] hover:bg-[#1a2c59] p-2 text-white"
+                              >
+                                <FaPaperPlane size={16} />
+                              </button>
+                            </form>
+                          </div>
+                  
+                        </div>
+                      </footer>
     </div>
   );
 };

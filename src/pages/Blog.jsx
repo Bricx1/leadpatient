@@ -1,3 +1,4 @@
+import { FaArrowRight } from 'react-icons/fa'; // ✅
 
 import { Link } from 'react-router-dom';
 import { Heart} from 'lucide-react';
@@ -17,7 +18,7 @@ const blogPosts = [
     id: 1,
     title: '30-Day Cognitive Behavioral Therapy Transformation',
     category: 'Mental Health',
-    image: '/blog/therapy.webp',
+    image: '/image.png',
     excerpt: 'Discover how CBT helps reshape negative thoughts and foster recovery in addiction treatment.',
     date: 'Jul 2025',
   },
@@ -167,11 +168,11 @@ const Blog = () => {
         <div>
           <h4 className="font-semibold mb-3">Support</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:underline">Help center</a></li>
-            <li><a href="#" className="hover:underline">Terms of service</a></li>
-            <li><a href="#" className="hover:underline">Legal</a></li>
-            <li><a href="#" className="hover:underline">Privacy policy</a></li>
-            <li><a href="#" className="hover:underline">Status</a></li>
+            <li><Link to="/serenity-support" className="hover:underline">Help center</Link></li>
+<li><Link to="/serenity-support?section=terms" className="hover:underline">Terms</Link></li>
+<li><Link to="/serenity-support?section=privacy" className="hover:underline">Privacy</Link></li>
+<li><Link to="/serenity-support?section=legal" className="hover:underline">Legal</Link></li>
+<li><Link to="/serenity-support?section=status" className="hover:underline">Status</Link></li>
           </ul>
         </div>
 
